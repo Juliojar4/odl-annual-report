@@ -1,0 +1,105 @@
+/* ============================================================
+   Thank You — Standalone CSS
+   Prefix: ty-  (all classes isolated to avoid conflicts)
+
+   Layout:
+     .ty-block      — full section, off-white background
+     .ty-text       — centred heading + body, constrained width
+     .ty-image-wrap — full-width image container, overflow hidden
+                      (clip prevents scale animation from spilling)
+   ============================================================ */
+
+/* ---- Block root ---- */
+.ty-block {
+  width: 100%;
+  background-color: #EBEFE6;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* ---- Text area ---- */
+.ty-text {
+  max-width: 750px;
+  margin: 0 auto;
+  padding: 96px 24px 72px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ---- Heading ---- */
+.ty-heading {
+  font-family: 'Roboto', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 1.15;
+  color: #1a2535;
+  margin: 0;
+}
+
+/* ---- Body ---- */
+.ty-body p {
+  font-family: 'Roboto', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.75;
+  color: #242F3F;
+
+  margin: 0;
+}
+
+/* ---- Image wrapper ---- */
+.ty-image-wrap {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  padding-bottom: 96px;
+  justify-content: center;
+}
+
+.ty-image {
+  width: 1200px;
+  display: block;
+  width: 1440px;
+  object-fit: cover;
+  padding-inline: 96px;
+  height: auto;
+  transform-origin: center center;
+  will-change: transform, opacity;
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+@media (max-width: 768px) {
+  .ty-text {
+    padding: 64px 24px 48px;
+    gap: 20px;
+  }
+  .ty-image {
+    height: auto !important;
+    padding-inline: 0 !important;
+  }
+  .ty-heading {
+    font-size: 36px;
+  }
+
+  .ty-body p {
+    font-size: 16px;
+  }
+}
+
+/* ============================================================
+   Accessibility — reduced motion
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .ty-image {
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+}

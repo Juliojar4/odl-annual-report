@@ -1,0 +1,340 @@
+/* ============================================================
+   Rounded Animation — Standalone CSS
+   Prefix: ra-  (all classes isolated to avoid conflicts)
+   No Tailwind, no build step required.
+   ============================================================ */
+
+/* ---- Block root ---- */
+.ra-block {
+  position: relative;
+  
+  background-color: #093E21;
+  will-change: transform;
+}
+
+/* ---- Spheres container ---- */
+.ra-spheres-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* ---- Shared sphere base ---- */
+.ra-sphere {
+  position: absolute;
+  top: 37%;
+  left: 50%;
+  border-radius: 50% !important;
+  aspect-ratio: 1 / 1;
+  will-change: transform, opacity, width, height;
+}
+
+@media (min-width: 1536px) {
+  .ra-sphere {
+    top: 33.333333%;
+  }
+}
+
+/* ---- Secondary sphere (behind, starts invisible) ---- */
+.ra-sphere-secondary {
+  width: 900px;
+  height: 900px;
+  background-color: #2E942633;
+  z-index: 0;
+  transform: translate(-50%, -50%) scale(0.5);
+  opacity: 0;
+}
+
+@media (min-width: 1024px) {
+  .ra-sphere-secondary {
+    width: 2100px;
+    height: 2100px;
+  }
+}
+
+/* ---- Primary sphere (front, starts at 420px) ---- */
+.ra-sphere-primary {
+  width: 420px;
+  height: 420px;
+  background-color: #78BE2133;
+  z-index: 1;
+  transform: translate(-50%, -50%);
+}
+
+/* ---- Outer scroll container (pinned during animation) ---- */
+.ra-container {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  position: relative;
+  z-index: 10;
+  min-height: 150vh;
+}
+
+@media (min-width: 1024px) {
+  .ra-container {
+    min-height: 100vh;
+  }
+}
+
+/* ---- Inner flex wrapper ---- */
+.ra-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 150vh;
+  position: relative;
+}
+
+@media (min-width: 1024px) {
+  .ra-inner {
+    min-height: 100vh;
+  }
+}
+
+/* ---- Responsive min-height overrides for short viewports ---- */
+@media (max-height: 750px) {
+  .ra-container,
+  .ra-inner {
+    min-height: 160vh !important;
+  }
+}
+
+@media (max-height: 600px) {
+  .ra-container,
+  .ra-inner {
+    min-height: 175vh !important;
+  }
+}
+
+/* ---- Initial content panel (fades out) ---- */
+.ra-initial-content {
+  position: absolute;
+  top: 37%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  will-change: opacity, transform;
+}
+
+@media (min-width: 1536px) {
+  .ra-initial-content {
+    top: 33.333333%;
+  }
+}
+
+/* ---- Secondary content panel (fades in) ---- */
+.ra-secondary-content {
+  position: absolute;
+  top: 37%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  opacity: 0;
+  will-change: opacity, transform;
+}
+
+@media (min-width: 1536px) {
+  .ra-secondary-content {
+    top: 33.333333%;
+  }
+}
+
+/* ---- Final content panel (quote, fades in at bottom) ---- */
+.ra-final-content {
+  position: absolute;
+  bottom: 0;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  padding-bottom: 2.5rem;
+  opacity: 0;
+}
+
+@media (min-width: 1024px) {
+  .ra-final-content {
+    width: 780px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .ra-final-content {
+    bottom: 60px;
+    padding-bottom: 5rem;
+  }
+}
+
+/* ---- Divider line ---- */
+.ra-divider {
+  background-color: #78BE21;
+  height: 1px;
+  margin-bottom: 1.25rem;
+}
+
+@media (min-width: 1024px) {
+  .ra-divider {
+    margin-bottom: 2.5rem;
+  }
+}
+
+/* ---- Eyebrow label ---- */
+.ra-eyebrow {
+  display: block;
+  font-size: 1.125rem;
+  line-height: 1.33;
+  color: #78BE21 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+  margin-bottom: 0.625rem;
+}
+
+/* ---- Heading ---- */
+.ra-block h2.ra-title {
+  font-size: 1.6rem !important;
+  line-height: 1.25;
+  font-weight: 400 !important;
+  color: #ffffff;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .ra-block h2.ra-title {
+    font-size: 2rem !important;
+  }
+}
+
+/* Hide <br> inside headings on mobile */
+@media (max-width: 1023px) {
+  .ra-block h2 br {
+    display: none;
+  }
+}
+
+/* ---- Body text ---- */
+.ra-subtitle,
+.ra-subtitle-secondary {
+  font-size: 1.25rem;
+  line-height: 1.4;
+  color: #ffffff;
+  margin-bottom: 0;
+}
+
+.ra-subtitle {
+  max-width: 580px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ra-subtitle-secondary {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ---- Quote / subhead ---- */
+.ra-subhead {
+  font-size: 1.875rem;
+  line-height: 1.33;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 1023px) {
+  .ra-subhead {
+    font-size: 1.5rem;
+  }
+}
+
+/* ---- Author section ---- */
+.ra-author {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 0;
+}
+
+.ra-leaf-icon {
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.ra-author-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0 !important;
+  line-height: 1.4;
+}
+
+.ra-author-title {
+  font-size: 1rem;
+  color: #ffffff;
+  margin-bottom: 0;
+  line-height: 1.375;
+}
+
+/* ---- Scroll arrow button ---- */
+.ra-scroll-arrow {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.ra-scroll-link {
+  display: inline-block;
+  text-decoration: none;
+}
+
+.ra-scroll-link svg {
+  transform: rotate(90deg);
+  overflow: visible;
+  display: block;
+}
+
+/* ---- SVG pulse animation (outer ring) ---- */
+@keyframes ra-svg-pulse {
+  0%   { r: 17; opacity: 0.4; }
+  100% { r: 26; opacity: 0;   }
+}
+
+.ra-pulse-circle {
+  animation: ra-svg-pulse 1.5s ease-out infinite;
+  transform-origin: 20px 20px;
+}
+
+/* ---- Accessibility: reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  .ra-block * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .ra-sphere-secondary {
+    opacity: 1 !important;
+    transform: translate(-50%, -50%) scale(1) !important;
+  }
+
+  .ra-secondary-content {
+    opacity: 1 !important;
+  }
+
+  .ra-final-content {
+    opacity: 1 !important;
+  }
+}

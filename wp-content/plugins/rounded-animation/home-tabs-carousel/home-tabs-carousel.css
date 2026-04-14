@@ -1,0 +1,524 @@
+/* ============================================================
+   Home Tabs Carousel — Standalone CSS
+   Prefix: htc-  (all classes isolated to avoid conflicts)
+   No Tailwind, no build step required.
+
+   Colors (dark-navy theme):
+     navy-900 = #242f3f  (block bg)
+     navy-800 = #1e2a38  (panel / image bg)
+     blue-500 = #4a7eb5  (active tab, bullet dots)
+     blue-400 = #3d6fa3  (inactive tab bg)
+     text-100 = #ffffff
+     text-200 = #ffffff  (body text)
+     text-300 = #8aa8be  (muted / inactive)
+   ============================================================ */
+
+/* ── Block Root ─────────────────────────────────────────────── */
+.htc-block {
+  position: relative;
+  overflow: hidden;
+  background-color: #242f3f;
+  padding: 72px 80px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 1023px) {
+  .htc-block {
+    padding: 48px 24px;
+  }
+}
+
+.htc-block--light {
+  background-color: #f5f7f9;
+}
+
+/* ── Background SVG — hidden in new design ───────────────────── */
+.htc-bg-svg,
+.htc-bg-svg-desktop,
+.htc-bg-svg-mobile,
+.htc-bg-overlay {
+  display: none !important;
+}
+
+/* ── Inner container ─────────────────────────────────────────── */
+.htc-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 10;
+}
+
+/* ── Desktop 2-column grid ───────────────────────────────────── */
+.htc-main-grid {
+  display: block;
+}
+
+@media (min-width: 1024px) {
+  .htc-main-grid {
+    display: grid;
+    grid-template-columns: 3fr 3fr;
+    gap: 80px;
+    align-items: start;
+  }
+}
+
+/* ── Left column ─────────────────────────────────────────────── */
+.htc-left-col {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* ── Block header ────────────────────────────────────────────── */
+.htc-header {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.htc-eyebrow {
+  font-family: 'Roboto', system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #7ab4d8;
+  margin: 0;
+}
+
+.htc-block-title {
+  font-family: 'Roboto', system-ui, sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #ffffff;
+  margin: 0;
+}
+
+@media (max-width: 1023px) {
+  .htc-block-title {
+    font-size: 28px;
+  }
+}
+
+.htc-block--light .htc-block-title {
+  color: #1a2535;
+}
+
+.htc-block-body {
+  font-family: 'Roboto', system-ui, sans-serif;
+  font-size: 20px;
+  line-height: 1.65;
+  color: #ffffff;
+  margin: 0;
+}
+
+.htc-block--light .htc-block-body {
+  color: #3d4f5e;
+}
+
+/* ── Vertical tab navigation ─────────────────────────────────── */
+.htc-tabs-nav {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .htc-tabs-nav {
+    display: block;
+  }
+}
+
+.htc-tabs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Base tab button */
+.htc-tab {
+  display: block;
+  width: fit-content;
+  min-width: 120px;
+  text-align: left;
+  padding: 9px 18px !important;
+  border-radius: 6px !important;
+  font-family: 'Roboto', system-ui, sans-serif;
+  font-weight: 700 !important;
+  font-size: 20px !important;
+  margin-bottom: 40px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.25s ease, color 0.25s ease;
+  /* reset inherited overrides */
+  opacity: 1;
+  margin-left: 0;
+  padding-left: 18px !important;
+  border-left: none;
+}
+
+.htc-tab--active {
+  background-color: #4495D1 !important;
+  color: #ffffff !important;
+}
+
+.htc-tab--inactive {
+  background-color: rgba(74, 126, 181, 0.18) !important; 
+  color: #8aa8be !important;
+}
+
+ 
+/* Light mode variants */
+.htc-block--light .htc-tab--active {
+  background-color: #2d6aa0;
+  color: #ffffff;
+}
+
+.htc-block--light .htc-tab--inactive {
+  background-color: rgba(45, 106, 160, 0.12);
+  color: #4a6a82;
+}
+
+/* ── Block-level CTA buttons ─────────────────────────────────── */
+.htc-block-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* Intentionally hide old green icon buttons in new design if needed */
+.htc-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Roboto', system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  transition: opacity 0.2s ease;
+}
+
+ 
+
+.htc-btn-primary-normal {
+  background-color: #4a7eb5;
+  color: #ffffff;
+}
+
+.htc-btn-secondary-normal {
+  background: transparent;
+  border: 1px solid currentColor;
+  color: #ffffff;
+}
+
+/* Hide pulse animation & large SVG icon from old design */
+.htc-btn-icon-pulse,
+.htc-btn svg circle {
+  display: none;
+}
+
+/* ── Right column: panels ────────────────────────────────────── */
+.htc-panels {
+  position: relative;
+}
+
+/* Panel — hidden by default, shown when active */
+.htc-panel {
+  display: none;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.htc-panel--active {
+  display: flex;
+}
+
+.htc-panel--inactive {
+  display: none;
+}
+
+/* ── Panel: image ────────────────────────────────────────────── */
+.htc-panel-image-wrap {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #1a2535;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.htc-panel-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Image button overlay */
+.htc-panel-image-btn {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+}
+
+/* ── Panel: text content ─────────────────────────────────────── */
+.htc-panel-title {
+  font-family: 'Roboto', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 1.2;
+  color: #ffffff;
+  margin: 0;
+}
+
+.htc-block--light .htc-panel-title {
+  color: #1a2535;
+}
+
+.htc-panel-subtitle {
+  font-family: 'Roboto', system-ui, sans-serif;
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #8aa8be;
+  margin: 0;
+}
+
+.htc-panel-content-wrap {
+  position: relative;
+}
+
+.htc-panel-content {
+  font-family: 'Roboto', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  color: #ffffff;
+  margin: 0;
+}
+
+.htc-block--light .htc-panel-content {
+  color: #3d4f5e;
+}
+
+.htc-panel-topic {
+  font-family: 'Roboto', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  color: #ffffff;
+  margin: 0;
+}
+
+/* ── Panel: bullet list ──────────────────────────────────────── */
+.htc-panel-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.htc-panel-list-title {
+  font-family: 'Roboto', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #e0ecf4;
+  margin: 0;
+}
+
+.htc-block--light .htc-panel-list-title {
+  color: #1a2535;
+}
+
+.htc-panel-list ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.htc-panel-list ul li {
+  font-family: 'Roboto', system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.55;
+  color: #ffffff;
+  padding-left: 16px;
+  position: relative;
+}
+
+.htc-panel-list ul li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #4a7eb5;
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+.htc-panel-list ul li strong {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.htc-block--light .htc-panel-list ul li {
+  color: #3d4f5e;
+}
+
+.htc-block--light .htc-panel-list ul li strong {
+  color: #1a2535;
+}
+
+/* ── Panel: scroll gradient (hidden — panels are auto height) ── */
+.htc-bottom-gradient {
+  display: none;
+}
+
+.htc-panel-content--scrollable {
+  overflow: visible;
+  max-height: none;
+}
+
+/* ── Panel: impact pills ─────────────────────────────────────── */
+.htc-impact-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.htc-impact-label {
+  font-family: 'Roboto', system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8aa8be;
+  margin: 0;
+}
+
+.htc-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.htc-pill {
+  font-family: 'Roboto', system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #ffffff;
+  background: rgba(74, 126, 181, 0.2);
+  border: 1px solid rgba(74, 126, 181, 0.35);
+  border-radius: 4px;
+  padding: 4px 10px;
+}
+
+/* ── Panel: tab action button ─────────────────────────────────── */
+.htc-tab-action {
+  margin-top: 4px;
+}
+
+/* ── Mobile: hide desktop panels ────────────────────────────── */
+@media (max-width: 1023px) {
+  .htc-main-grid {
+    display: none;
+  }
+}
+
+/* ── Mobile accordion ─────────────────────────────────────────── */
+.htc-mobile {
+  display: none;
+}
+
+@media (max-width: 1023px) {
+  .htc-mobile {
+    display: block;
+  }
+}
+
+.htc-accordion-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.htc-accordion-item {
+  border-bottom: 1px solid rgba(74, 126, 181, 0.25);
+}
+
+.htc-accordion-header-wrap {
+  margin: 0;
+}
+
+.htc-accordion-trigger {
+  display: flex;
+  justify-content: space-between;
+  color: #232F3F !important;
+  align-items: center;
+  width: 100%;
+  padding: 18px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.htc-accordion-label {
+  font-family: 'Roboto', system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.htc-block--light .htc-accordion-label {
+  color: #1a2535;
+}
+
+.htc-accordion-icon {
+  flex-shrink: 0;
+  margin-left: 12px;
+}
+
+.htc-accordion-icon svg line {
+  stroke: #4a7eb5 !important;
+}
+
+.htc-accordion-icon-vertical {
+  transform-origin: center;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.htc-accordion-item--open .htc-accordion-icon-vertical {
+  transform: rotate(90deg);
+  opacity: 0;
+}
+
+.htc-accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+
+.htc-accordion-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 28px;
+  padding-bottom: 24px;
+}
+
+/* ── Accessibility: reduced motion ───────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .htc-tab,
+  .htc-panel,
+  .htc-accordion-content,
+  .htc-accordion-icon-vertical {
+    transition: none;
+  }
+}

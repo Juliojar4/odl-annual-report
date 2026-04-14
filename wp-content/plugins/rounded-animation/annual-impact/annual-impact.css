@@ -1,0 +1,88 @@
+/* ============================================================
+   Annual Impact — Standalone CSS
+   Prefix: ai-  (all classes isolated to avoid conflicts)
+
+   Structure:
+     .ai-wrap          — outer container, no overflow so SVG bleeds edge-to-edge
+     .ai-divider       — holds the shape-divider SVG (100vw, no gaps)
+     .ai-block         — dark-blue section with text content
+   ============================================================ */
+
+/* ---- Outer wrapper ---- */
+.ai-wrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---- Shape divider ---- */
+.ai-divider {
+  width: 100%;
+  line-height: 0;   /* removes inline gap under <img> */
+  font-size: 0;
+}
+
+.ai-divider__img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ---- Dark section ---- */
+.ai-block {
+  width: 100%;
+  background-color: #242F3F;
+  box-sizing: border-box;
+}
+
+/* ---- Inner container ---- */
+.ai-inner {
+  max-width: 780px;
+  margin: 0 auto;
+    padding: 0px 12px 96px 12px;
+      display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  text-align: center;
+}
+
+/* ---- Heading ---- */
+.ai-heading {
+  font-family: 'Roboto', system-ui, sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 48px !important;
+  line-height: 1.15 !important;
+  color: #ffffff !important;
+  margin: 0;
+}
+
+/* ---- Body ---- */
+.ai-body p {
+  font-family: 'Roboto', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.75;
+  color: #ffffff;
+  margin: 0;
+  opacity: 0.9;
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+@media (max-width: 768px) {
+  .ai-inner {
+    padding: 56px 24px 72px;
+    gap: 24px;
+  }
+
+  .ai-heading {
+    font-size: 34px;
+  }
+
+  .ai-body p {
+    font-size: 16px;
+  }
+}

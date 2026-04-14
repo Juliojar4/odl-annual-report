@@ -1,0 +1,309 @@
+/* ============================================================
+   Financial Chart — Standalone CSS
+   Prefix: fc-  (all classes isolated to avoid conflicts)
+   No Tailwind, no build step required.
+   ============================================================ */
+
+/* ---- Block root ---- */
+.fc-block {
+  width: 100%;
+  background-color: #242F3F;
+  padding: 64px 80px 80px;
+  box-sizing: border-box;
+}
+
+/* ---- Section title ---- */
+.fc-title {
+  font-family: 'Roboto', system-ui, sans-serif;
+  font-weight: 300;
+  font-size: 40px;
+  line-height: 1.2;
+  color: #ffffff;
+  text-align: center;
+  margin: 0 0 48px;
+  letter-spacing: 0.02em;
+}
+
+/* ---- Three-column layout ---- */
+.fc-layout {
+  display: grid;
+  grid-template-columns:1fr 1fr;
+  gap: 48px;
+  align-items: start;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ---- Column headings ---- */
+.fc-col-heading {
+  font-family: 'Roboto', system-ui, sans-serif;
+  font-weight: 300;
+  font-size: 32px;
+  line-height: 1.3;
+  letter-spacing: 0.12em;
+  text-align: center;
+  color: #ffffff;
+  text-transform: uppercase;
+  margin: 0 0 20px;
+}
+
+/* ---- Left: income ---- */
+.fc-col--income {
+  padding-top: 8px;
+}
+
+.fc-income-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.fc-income-note {
+  font-family: 'Roboto', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #ffffff;
+  margin-bottom: 32px;
+}
+
+/* ---- Centre: chart ---- */
+.fc-col--chart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* The chart wrap is square, relative so pins can be absolutely positioned */
+.fc-chart-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  aspect-ratio: 1;
+}
+
+
+/* ---- Pins ---- */
+.fc-pin {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--fc-pin-color, #4495d1);
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  z-index: 10;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+}
+
+.fc-pin svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.fc-pin:hover,
+.fc-pin:focus-visible {
+  transform: translate(-50%, -50%) scale(1.2);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+  outline: none;
+}
+
+.fc-pin circle {
+  stroke: #242F3F !important;
+}
+
+.fc-pin line {
+  stroke: #242F3F !important;
+}
+
+
+.fc-pin.is-active {
+  transform: translate(-50%, -50%) scale(1.15);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.35), 0 4px 14px rgba(0, 0, 0, 0.5);
+}
+
+/* ---- Popups ---- */
+.fc-popup {
+  position: absolute;
+  transform: translate(-50%, calc(-100% - 18px));
+  z-index: 20;
+  background-color: #0f1d2b;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  padding: 14px 16px;
+  width: 220px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  transform: translate(-50%, calc(-100% - 10px));
+}
+
+.fc-popup.is-open {
+  pointer-events: auto;
+  opacity: 1;
+  transform: translate(-50%, calc(-100% - 18px));
+}
+
+/* Small arrow pointing down to the pin */
+.fc-popup::after {
+  content: '';
+  position: absolute;
+  bottom: -7px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 7px solid #0f1d2b;
+}
+
+.fc-popup::before {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid rgba(255, 255, 255, 0.12);
+}
+
+.fc-popup__title {
+  display: block;
+  font-family: 'Roboto', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.fc-popup__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.fc-popup__list li {
+  font-family: 'Roboto', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.45;
+  color: #c8d8e8;
+  padding-left: 12px;
+  position: relative;
+}
+
+.fc-popup__list li::before {
+  content: '·';
+  position: absolute;
+  left: 0;
+  color: #6a9cc4;
+  font-size: 16px;
+  line-height: 1.1;
+}
+
+/* ---- Right: expenses list ---- */
+.fc-expense-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.fc-expense-item {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.fc-expense-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.fc-expense-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.fc-expense-label {
+  font-family: 'Roboto', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.fc-expense-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.fc-expense-items li {
+  font-family: 'Roboto', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #ffffff;
+}
+
+/* ============================================================
+   Responsive — tablet / mobile
+   ============================================================ */
+
+@media (max-width: 900px) {
+  .fc-block {
+    padding: 48px 24px 56px;
+  }
+
+  .fc-layout {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .fc-col--chart {
+    order: -1;
+  }
+
+  .fc-chart-wrap {
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  .fc-popup {
+    width: 180px;
+  }
+}
+
+/* ============================================================
+   Accessibility — reduced motion
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .fc-pin,
+  .fc-popup {
+    transition: none;
+  }
+}

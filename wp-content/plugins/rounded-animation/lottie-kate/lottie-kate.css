@@ -1,0 +1,156 @@
+/* ============================================================
+   Lottie KATE — Standalone CSS
+   Prefix: lk-  (all classes isolated to avoid conflicts)
+   No Tailwind, no build step required.
+   ============================================================ */
+
+/* ---- Block root ---- */
+.lk-block {
+  width: 100%;
+  background-color: #EBEFE6;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* ---- Inner: two-column layout ---- */
+.lk-inner {
+  display: flex;
+  align-items: center;
+  max-width: 1280px;
+  margin: 0 auto;
+  min-height: 560px;
+}
+
+/* ---- Left column: animation ---- */
+.lk-col--animation {
+  flex: 0 0 52%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Let the animation bleed top & bottom */
+  align-self: stretch;
+  overflow: hidden;
+}
+
+.lk-player {
+  width: 100%;
+  height: 100%;
+  min-height: 480px;
+  display: block;
+}
+
+/* ---- Right column: content ---- */
+.lk-col--content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 64px 80px 64px 0px;
+  box-sizing: border-box;
+      margin-left: -50px;
+    z-index: 99;
+}
+
+/* ---- Heading ---- */
+.lk-heading {
+  font-family: 'Roboto', system-ui, sans-serif;
+  font-weight: 900;
+  font-size: 48px;
+  line-height: 1.2;
+  color: #1a2535;
+  max-width: 517px;
+  margin: 0;
+}
+
+/* ---- Body ---- */
+.lk-body p {
+  font-family: 'Roboto', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #242F3F;
+  margin: 0 0 12px;
+}
+
+.lk-body p:last-child {
+  margin-bottom: 0;
+}
+
+/* ---- CTA button ---- */
+.lk-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  background-color: #1a2535;
+  color: #ffffff !important;
+  font-family: 'Roboto', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  white-space: nowrap;
+  transition: opacity 0.2s ease;
+}
+
+.lk-btn:hover,
+.lk-btn:focus {
+  opacity: 0.85;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.lk-btn svg {
+  width: 10px;
+  height: 10px;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   Responsive — tablet / mobile
+   ============================================================ */
+
+@media (max-width: 900px) {
+  .lk-inner {
+    flex-direction: column;
+    min-height: auto;
+  }
+
+  .lk-col--content {
+
+  }
+
+  .lk-col--animation {
+    flex: none;
+    width: 100%;
+  }
+
+  .lk-col--content {
+    padding: 40px 24px 48px;
+    gap: 20px;
+    margin-top: -180px;
+    margin-left: 0px;
+  }
+
+  .lk-heading {
+    font-size: 28px;
+  }
+}
+
+/* ============================================================
+   Accessibility — reduced motion
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .lk-player {
+    /* lottie-player respects this via its own logic,
+       but we pause via attribute if needed */
+  }
+
+  .lk-btn {
+    transition: none;
+  }
+}

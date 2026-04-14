@@ -1,0 +1,515 @@
+/* ============================================================
+   Horizontal Scroll Steps — Standalone CSS
+   Prefix: hss-  (all classes isolated to avoid conflicts)
+   No Tailwind, no build step required.
+   ============================================================ */
+
+/* ---- Block root — GSAP pins this element ---- */
+/*
+   The background lives here so it stays constant while step
+   contents fade in and out above it.
+*/
+.hss-block {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  background-color: #242f3f;
+}
+
+/* ---- Track: stacking context for all steps ---- */
+/* overflow: hidden clips steps that are off-screen during horizontal transitions */
+.hss-track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* ---- Individual step: fills the block, stacked on top of each other ---- */
+/*
+   No background here — .hss-block owns the background so it stays visible
+   while step contents fade. Only opacity and transform are animated.
+*/
+.hss-step {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  padding: 96px;
+  box-sizing: border-box;
+  overflow: hidden;
+  will-change: opacity, transform;
+}
+
+/* Steps 2+ start hidden; GSAP sets the initial y offset in JS */
+.hss-step + .hss-step {
+  opacity: 0;
+}
+
+/* ---- Shared content wrapper (max-width + centering) ---- */
+.hss-content {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+  width: 100%;
+  max-width: 1440px;
+}
+
+/* ---- Shared body text ---- */
+.hss-body p {
+  font-family: 'Roboto', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.5;
+  color: #ffffff;
+  margin: 0 0 1em;
+}
+
+.hss-body p:last-child {
+  margin-bottom: 0;
+}
+
+/* ===========================================================
+   Layout: five-years (Step 1)
+   =========================================================== */
+
+/* Centered heading above the two columns */
+.hss-step--five-years .hss-heading {
+  display: flex;
+  justify-content: center;
+}
+
+.hss-step--five-years .hss-heading h2 {
+  font-family: 'Roboto', system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 1.3;
+  color: #ffffff;
+  text-align: center;
+  max-width: 800px;
+  margin: 0;
+}
+
+/* Two-column row */
+.hss-step--five-years .hss-cols {
+  display: flex;
+  gap: 112px;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Left col: body text + CTA button */
+.hss-col--text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  max-width: 600px;
+}
+
+/* Red CTA button */
+.hss-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  background-color: #ed1a38;
+  color: #ffffff !important;
+  font-family: 'Roboto', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.5;
+  text-decoration: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+  white-space: nowrap;
+}
+
+.hss-btn:hover,
+.hss-btn:focus {
+  opacity: 0.9;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.hss-btn svg {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+}
+
+/* Right col: quote + arrow decoration */
+.hss-col--quote {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+  align-items: center;
+  justify-content: center;
+}
+
+.hss-quote {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.hss-quote__text {
+  font-family: 'Roboto', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 1.5;
+  color: #ffffff;
+  margin: 0;
+  width: 100%;
+}
+
+.hss-quote__attribution {
+  font-family: 'Roboto', system-ui, sans-serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 1.5;
+  color: #ffffff;
+  width: 100%;
+}
+
+.hss-arrow-decoration {
+  display: block;
+  width: 188px;
+  height: 49px;
+  object-fit: contain;
+}
+
+/* ===========================================================
+   Layout: before-camp (Step 2)
+   =========================================================== */
+
+/*
+   This step uses a single full-height row of columns.
+   The .hss-content stretches to fill the step's height
+   so the photo column can use align-self: stretch.
+*/
+.hss-step--before-camp .hss-content {
+  gap: 0;
+  height: 100%;
+}
+
+.hss-step--before-camp .hss-cols {
+  display: flex;
+  gap: 80px;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* Left col: heading, body text, stats */
+.hss-col--before-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  max-width: 600px;
+}
+
+.hss-before-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.hss-step--before-camp h2 {
+  font-family: 'Roboto', system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 1.3;
+  color: #ffffff;
+  margin: 0;
+}
+
+/* 2×2 stats grid */
+.hss-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px 64px;
+  max-width: 500px;
+}
+
+.hss-stat__num {
+  display: block;
+  font-family: 'Roboto', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 1;
+  color: #4495d1;
+}
+
+.hss-stat__label {
+  display: block;
+  font-family: 'Roboto', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #ffffff;
+  margin-top: 12px;
+}
+
+/* Right col: photo, fills full column height */
+.hss-col--photo {
+  flex: 1;
+  align-self: stretch;
+  position: relative;
+  min-height: 300px;
+}
+
+.hss-col--photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ===========================================================
+   Layout: after-camp (Step 3)
+   =========================================================== */
+
+/*
+   Mirror of before-camp: photo LEFT, text RIGHT.
+   Reuses .hss-col--photo and .hss-stats from before-camp.
+*/
+.hss-step--after-camp .hss-content {
+  gap: 0;
+  height: 100%;
+}
+
+.hss-step--after-camp .hss-cols {
+  display: flex;
+  gap: 80px;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* Right col: heading, body text, stats label, stats */
+.hss-col--after-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  max-width: 600px;
+}
+
+.hss-after-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.hss-step--after-camp h2 {
+  font-family: 'Roboto', system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 1.3;
+  color: #ffffff;
+  margin: 0;
+}
+
+/* Photo column on the right side (text first, photo last) */
+.hss-step--after-camp .hss-cols--photo-right {
+  flex-direction: row;
+}
+
+/* Square photo: constrain to a fixed square within its column */
+.hss-col--photo--square {
+    flex: 1;
+    align-self: stretch;
+    position: relative;
+    min-height: 300px;
+}
+
+/* "Evaluation data shows:" label above the stats grid */
+.hss-stats-label {
+  font-family: 'Roboto', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #ffffff;
+  margin: 0 0 4px;
+}
+
+.hss-stats-group {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===========================================================
+   Layout: family-connection (Step 4)
+   =========================================================== */
+
+/*
+   Left col: heading + body text
+   Right col: 2×2 photo grid
+*/
+.hss-step--family-connection .hss-content {
+  gap: 0;
+  height: 100%;
+}
+
+.hss-step--family-connection .hss-cols {
+  display: flex;
+  gap: 80px;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* Left col: text */
+.hss-col--fc-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  max-width: 480px;
+}
+
+.hss-step--family-connection h2 {
+  font-family: 'Roboto', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 1.2;
+  color: #ffffff;
+  margin: 0;
+}
+
+/* Right col: 2×2 photo grid */
+.hss-col--fc-grid {
+  flex: 1.4;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 12px;
+  align-self: stretch;
+  padding: 40px 0;
+  box-sizing: border-box;
+}
+
+.hss-fc-photo {
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  background-color: #1a2535;
+}
+
+.hss-fc-photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ===========================================================
+   Responsive — tablet / mobile
+   =========================================================== */
+
+@media (max-width: 900px) {
+  /*
+     Steps continuam absolute/stacked (mesmo que desktop).
+     O bloco fica pinado e o GSAP translada o .hss-content
+     de cada step para cima — simulando scroll interno.
+     Só muda padding, tipografia e layout de colunas.
+  */
+  .hss-step {
+    padding: 48px 24px;
+   }
+
+  .step-two {
+
+  }
+
+  .hss-col--after-text {
+    flex: none;
+    max-width: 100%;
+  }
+
+  /* Libera a altura natural para medir overflow; will-change para y animado */
+  .hss-content {
+    height: auto !important;
+    will-change: transform;
+  }
+
+  .hss-step--five-years .hss-heading h2 {
+    font-size: 28px;
+  }
+
+  .hss-step--five-years .hss-cols {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .hss-quote__text,
+  .hss-quote__attribution {
+    font-size: 28px;
+  }
+
+  .hss-step--before-camp .hss-cols {
+    flex-direction: column;
+    gap: 32px;
+    align-items: flex-start;
+  }
+
+  .hss-col--photo {
+    width: 100%;
+    height: 260px;
+    align-self: auto;
+  }
+
+  .hss-step--after-camp .hss-cols {
+    flex-direction: column-reverse;
+    gap: 32px;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .hss-step--family-connection .hss-cols {
+    flex-direction: column;
+    gap: 24px;
+    align-items: flex-start;
+  }
+
+  .hss-col--fc-grid {
+    width: 100%;
+    padding: 0;
+    gap: 8px;
+  }
+
+  .hss-fc-photo {
+    aspect-ratio: 1;
+    position: relative;
+  }
+
+  .hss-stat__num {
+    font-size: 36px;
+  }
+
+  .hss-body p {
+    font-size: 16px;
+  }
+}
+
+/* ===========================================================
+   Accessibility — reduced motion
+   =========================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .hss-track {
+    transform: none !important;
+  }
+}

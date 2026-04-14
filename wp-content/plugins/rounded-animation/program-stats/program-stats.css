@@ -1,0 +1,185 @@
+/* ============================================================
+   Program Stats — Standalone CSS
+   Prefix: ps-  (all classes isolated to avoid conflicts)
+   No Tailwind, no build step required.
+   ============================================================ */
+
+/* ---- Block root ---- */
+.ps-block {
+  width: 100%;
+  background-color: #EBEFE6;
+  box-sizing: border-box;
+  padding: 80px 96px 0;
+}
+
+/* ---- Top row: text col + stats col ---- */
+.ps-top {
+  display: flex;
+  gap: 80px;
+  align-items: flex-start;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding-bottom: 64px;
+}
+
+/* ---- Left column: heading + body + button ---- */
+.ps-col--text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  max-width: 520px;
+}
+
+.ps-heading {
+  font-family: 'Roboto', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 42px;
+  line-height: 1.2;
+  color: #242f3f;
+  margin: 0;
+}
+
+.ps-body p {
+  font-family: 'Roboto', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.6;
+  color: #3d4f5e;
+  margin: 0 0 1em;
+}
+
+.ps-body p:last-child {
+  margin-bottom: 0;
+}
+
+/* CTA button */
+.ps-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  background-color: #e8193c;
+  color: #ffffff !important;
+  font-family: 'Roboto', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+.ps-btn:hover,
+.ps-btn:focus {
+  opacity: 0.9;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.ps-btn svg {
+  width: 11px;
+  height: 11px;
+  flex-shrink: 0;
+}
+
+/* ---- Right column: stats label + 2×2 grid ---- */
+.ps-col--stats {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-top: 8px;
+}
+
+.ps-stats-label {
+  font-family: 'Roboto', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #242f3f;
+  margin: 0;
+}
+
+/* 2×2 stats grid */
+.ps-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px 48px;
+}
+
+.ps-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ps-stat__num {
+  font-family: 'Roboto', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 56px;
+  line-height: 1;
+  color: #e8193c;
+}
+
+.ps-stat__label {
+  font-family: 'Roboto', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #3d4f5e;
+}
+
+  .ps-photo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 96px;
+  }
+ 
+
+/* ============================================================
+   Responsive — tablet / mobile
+   ============================================================ */
+
+@media (max-width: 900px) {
+  .ps-block {
+    padding: 56px 24px 0;
+  }
+
+  .ps-top {
+    flex-direction: column;
+    gap: 48px;
+    padding-bottom: 48px;
+  }
+
+  .ps-col--text {
+    max-width: 100%;
+  }
+
+  .ps-heading {
+    font-size: 30px;
+  }
+
+  .ps-stat__num {
+    font-size: 40px;
+  }
+
+  .ps-photo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 56px;
+  }
+}
+
+/* ============================================================
+   Accessibility — reduced motion
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .ps-btn {
+    transition: none;
+  }
+}

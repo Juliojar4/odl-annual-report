@@ -1,0 +1,5 @@
+name: shortcodelib
+recipe: wordpress
+config:
+  webroot: .
+  php: "8.3"

@@ -1,0 +1,109 @@
+/* ============================================================
+   Video Fade Text — Standalone CSS
+   Prefix: vft-  (all classes isolated to avoid conflicts)
+   No Tailwind, no build step required.
+   ============================================================ */
+
+/* ---- Block root ---- */
+.vft-block {
+  position: relative;
+  overflow: hidden;
+}
+
+/* ---- Background video ---- */
+.vft-video {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+
+
+/* ---- Semi-transparent overlay ---- */
+.vft-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background-color: var(--vft-overlay, rgba(0, 0, 0, 0.30));
+  pointer-events: none;
+}
+
+/* ---- Scroll container (pinned during animation) ---- */
+/*
+   Uses CSS Grid with place-items: center so both texts sit in the
+   same grid cell and are always centred in the viewport — no
+   position: absolute needed, no transform conflicts with GSAP.
+   Starts invisible; JS adds .is-ready after window load.
+*/
+.vft-container {
+  position: relative;
+  z-index: 10;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.vft-container.is-ready {
+  opacity: 1;
+}
+
+/* ---- Shared text styles ---- */
+/*
+   Both texts occupy the same grid cell (grid-area: 1 / 1),
+   so they overlap perfectly and the grid keeps them centred.
+*/
+.vft-text {
+  grid-area: 1 / 1;
+
+  width: 100%;
+  max-width: 1100px;
+  padding: 0 1.5rem;
+
+  font-family: 'Roboto', system-ui, sans-serif;
+  font-size: clamp(1.5rem, 3.5vw, 3rem);
+  font-weight: 400;
+  line-height: 1.3;
+  text-align: center;
+  color: #ffffff;
+
+  will-change: opacity, transform;
+  margin: 0;
+}
+
+.vft-text strong,
+.vft-text b {
+  font-weight: 700;
+}
+
+/* ---- Text 1: visible on load ---- */
+.vft-text-1 {
+  opacity: 1;
+}
+
+/* ---- Text 2: hidden on load (GSAP sets initial y offset in JS) ---- */
+.vft-text-2 {
+  opacity: 0;
+}
+
+/* ---- Mobile adjustments ---- */
+@media (max-width: 767px) {
+  .vft-text {
+    padding: 0 1rem;
+  }
+}
+
+/* ---- Accessibility: reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  .vft-text-1,
+  .vft-text-2 {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
