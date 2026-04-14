@@ -88,7 +88,11 @@
 
 .htc-block-title {
   font-family: 'Roboto', system-ui, sans-serif;
+<<<<<<< HEAD
   font-size: 48px;
+=======
+  font-size: 3rem;
+>>>>>>> 718570574d3be8385b257034b2841f5f995cc98e
   font-weight: 400;
   line-height: 1.2;
   color: #ffffff !important;
@@ -97,7 +101,7 @@
 
 @media (max-width: 1023px) {
   .htc-block-title {
-    font-size: 28px;
+    font-size: 2rem;
   }
 }
 

@@ -55,10 +55,10 @@
 /* ---- Heading ---- */
 .lk-heading {
   font-family: 'Roboto', system-ui, sans-serif;
-  font-weight: 900;
-  font-size: 48px;
+  font-weight: 400;
+  font-size: 3rem;
   line-height: 1.2;
-  color: #1a2535;
+  color: #242F3F;
   max-width: 517px;
   margin: 0;
 }
@@ -119,10 +119,6 @@
     min-height: auto;
   }
 
-  .lk-col--content {
-
-  }
-
   .lk-col--animation {
     flex: none;
     width: 100%;
@@ -136,7 +132,7 @@
   }
 
   .lk-heading {
-    font-size: 28px;
+    font-size: 2rem;
   }
 }
 
