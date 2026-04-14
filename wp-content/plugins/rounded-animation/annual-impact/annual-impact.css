@@ -20,11 +20,15 @@
   width: 100%;
   line-height: 0;   /* removes inline gap under <img> */
   font-size: 0;
+      pointer-events: none;
+    user-select: none;
 }
 
 .ai-divider__img {
   display: block;
   width: 100%;
+  pointer-events: none;
+  user-select: none;
   height: auto;
 }
 
@@ -50,7 +54,7 @@
 /* ---- Heading ---- */
 .ai-heading {
   font-family: 'Roboto', system-ui, sans-serif !important;
-  font-weight: 700 !important;
+  font-weight: 400 !important;
   font-size: 48px !important;
   line-height: 1.15 !important;
   color: #ffffff !important;
@@ -79,7 +83,7 @@
   }
 
   .ai-heading {
-    font-size: 34px;
+    font-size: 40px;
   }
 
   .ai-body p {

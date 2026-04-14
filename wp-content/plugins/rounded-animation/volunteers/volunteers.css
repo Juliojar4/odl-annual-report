@@ -120,8 +120,14 @@
     padding: 56px 24px 72px;
   }
 
+  .vm-stat {
+    margin: auto;
+    text-align: center;
+    max-width: none;
+  }
+
   .vm-heading {
-    font-size: 2rem;
+    font-size: 40px;
     margin-bottom: 36px;
   }
 

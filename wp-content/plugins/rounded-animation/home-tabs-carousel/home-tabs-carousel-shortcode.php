@@ -508,6 +508,27 @@ function htc_render_shortcode( $atts ) {
 
         <?php /* ── Mobile accordion ─────────────────────────── */ ?>
         <div class="htc-container htc-mobile">
+
+            <?php if ( ! empty( $atts['block_eyebrow'] ) || ! empty( $atts['block_title'] ) || ! empty( $atts['block_body'] ) ) : ?>
+            <div class="htc-header htc-mobile-header">
+                <?php if ( ! empty( $atts['block_eyebrow'] ) ) : ?>
+                    <p class="htc-eyebrow">
+                        <?php echo wp_kses( $atts['block_eyebrow'], $allowed ); ?>
+                    </p>
+                <?php endif; ?>
+                <?php if ( ! empty( $atts['block_title'] ) ) : ?>
+                    <h2 class="htc-block-title">
+                        <?php echo wp_kses( $atts['block_title'], $allowed ); ?>
+                    </h2>
+                <?php endif; ?>
+                <?php if ( ! empty( $atts['block_body'] ) ) : ?>
+                    <p class="htc-block-body">
+                        <?php echo wp_kses( $atts['block_body'], $allowed ); ?>
+                    </p>
+                <?php endif; ?>
+            </div>
+            <?php endif; ?>
+
             <div class="htc-accordion-wrapper" role="region" aria-label="Home tabs accordion">
                 <?php foreach ( $slides as $index => $slide ) :
                     $accordion_id = esc_attr( $block_id . '-acc-' . $index );

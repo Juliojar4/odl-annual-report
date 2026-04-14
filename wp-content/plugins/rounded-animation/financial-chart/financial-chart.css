@@ -246,7 +246,7 @@
 .fc-expense-label {
   font-family: 'Roboto', system-ui, sans-serif;
   font-weight: 700;
-  font-size: 12px;
+  font-size: 16px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #ffffff;
@@ -264,7 +264,7 @@
 .fc-expense-items li {
   font-family: 'Roboto', system-ui, sans-serif;
   font-weight: 400;
-  font-size: 12px;
+  font-size: 16px;
   line-height: 1.5;
   color: #ffffff;
 }

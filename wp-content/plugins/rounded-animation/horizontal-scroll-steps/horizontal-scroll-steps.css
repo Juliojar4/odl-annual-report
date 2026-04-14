@@ -439,6 +439,24 @@ display: flex
      de cada step para cima — simulando scroll interno.
      Só muda padding, tipografia e layout de colunas.
   */
+
+  .hss-step--before-camp h2 {
+    font-size: 40px;
+
+  }
+
+  .hss-step--after-camp h2 {
+    font-size: 40px;
+  }
+
+  .hss-step--family-connection h2 {
+    font-size: 40px;
+  }
+
+  .hss-step--after-camp h2 {
+    font-size: 40px;
+  }
+
   .hss-step {
     padding: 48px 24px;
    }
@@ -458,8 +476,29 @@ display: flex
     will-change: transform;
   }
 
+  .hss-step--five-years .hss-heading {
+    align-items: normal;
+  }
+
   .hss-step--five-years .hss-heading h2 {
-    font-size: 28px;
+    font-size: 40px;
+    text-align: left;
+  }
+
+  .hss-content {
+    gap: 32px;
+  }
+
+  .hss-step--five-years .hss-heading p {
+    font-size: 20px;
+    text-align: left;
+    line-height: 1.1;
+    margin-top: 24px;
+
+  }
+
+  .hss-step--five-years .hss-heading h2 br {
+    display: none;
   }
 
   .hss-step--five-years .hss-cols {

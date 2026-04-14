@@ -62,10 +62,11 @@ function fc_render_shortcode( $atts ) {
 
     $config = apply_filters( 'fc_block_config', fc_default_config() );
 
-    $title          = isset( $config['title'] )          ? esc_html( $config['title'] )          : 'Financials';
-    $income_heading = isset( $config['income_heading'] )  ? esc_html( $config['income_heading'] )  : 'INCOME';
-    $income_note    = isset( $config['income_note'] )     ? esc_html( $config['income_note'] )     : '';
-    $slices         = isset( $config['slices'] )          ? (array) $config['slices']              : [];
+    $title          = isset( $config['title'] )          ? esc_html( $config['title'] )                              : 'Financials';
+    $income_heading = isset( $config['income_heading'] )  ? esc_html( $config['income_heading'] )                    : 'INCOME';
+    $income_note    = isset( $config['income_note'] )     ? esc_html( $config['income_note'] )                       : '';
+    $income_items   = isset( $config['income_items'] )    ? array_map( 'esc_html', (array) $config['income_items'] ) : [];
+    $slices         = isset( $config['slices'] )          ? (array) $config['slices']                                : [];
 
     // Sanitise slices and encode for JS
     $safe_slices = array_map( function( $s ) {
@@ -95,6 +96,7 @@ function fc_render_shortcode( $atts ) {
                     <p class="fc-income-note"><?php echo $income_note; ?></p>
                     <?php endif; ?>
                 </div>
+             
                             <!-- Centre: Pie chart -->
             <div class="fc-col fc-col--chart">
                 <div
@@ -155,56 +157,68 @@ function fc_default_config() {
         'title'          => 'Financials',
         'income_heading' => 'INCOME',
         'income_note'    => 'Hover or tap the icons on the pie chart below to see the details.',
+        'income_items'   => [
+            'Government Contracts - $6,800,990.00',
+            'Grant Income (Private/Corporate) - $90,000.00',
+            'Fees & Services - $28,200.00',
+            'Private Donations - $129,780.00',
+            'Interest & Investment Income - $333,208.00',
+            'Training and Education - $366,270.00',
+            'Events - $120,322.00',
+            'Unrestricted Donations - $120,780.00',
+            'Other - $56,120.00',
+        ],
         'slices'         => [
             [
                 'label' => 'EDUCATION',
                 'color' => '#3d7fc4',
-                'value' => 533466,
+                'value' => 559930,
                 'items' => [
-                    'Facilitator Trainings: $176,350.00',
-                    'CE Courses: $357,116.00',
+                    'Facilitator Trainings: $190,450.00',
+                    'CE Courses: $369,480.00',
                 ],
             ],
             [
                 'label' => 'YOUTH PREVENTION',
                 'color' => '#d4a020',
-                'value' => 618613,
+                'value' => 672314,
                 'items' => [
-                    '(TINAD + PreVenture): $202,659.00',
-                    'Community Outreach Education: $102,696.00',
-                    'Marketing: $313,258.00',
+                    'TINAD + PreVenture: $210,763.00',
+                    'Community Outreach Education: $139,376.00',
+                    'Marketing: $322,175.00',
                 ],
             ],
             [
                 'label' => 'SUPPORT',
                 'color' => '#c82a3c',
-                'value' => 6993060,
+                'value' => 5970902,
                 'items' => [
-                    'Lifeline for Loss: $24,300.00',
-                    'CRAFT Family Support: $179,420.00',
-                    'Naloxone Kits: $5,788,323.00',
-                    'Benzodiazepine Test Strips: $145,595.00',
-                    "Aaron's Place: $287,508.00",
-                    'Heart Rock Justus Family Recovery Center: $432,840.00',
-                    'MACRO-B: $59,874.00',
-                    'Peer Grief Support: $37,000.00',
-                    'CHARIOT: $38,200.00',
+                    'Lifeline for Loss: $28,700.00',
+                    'CRAFT Family Support: $190,840.00',
+                    'Naloxone Kits: $4,527,690.00',
+                    'Test Strips: $169,807.00',
+                    "Aaron's Place: $350,402.00",
+                    'Heart Rock Justus Family Recovery Center: $494,214.00',
+                    'MACRO-B: $124,887.00',
+                    'Peer Grief Support: $29,051.00',
+                    'CHARIOT: $55,311.00',
                 ],
             ],
             [
                 'label' => 'ADVOCACY',
                 'color' => '#4ab8d0',
-                'value' => 221955,
+                'value' => 287877,
                 'items' => [
-                    'Community Events: $221,955.00',
+                    'Community Events: $287,877.00',
                 ],
             ],
             [
                 'label' => 'OPERATIONS',
                 'color' => '#d0d8e4',
-                'value' => 558440,
+                'value' => 1018728,
                 'items' => [
-                    'Administrative/Management/Staff: $558,440.00',
+                    'Administrative / Management / Staff: $878,474.00',
+                    'Depreciation: $140,254.00',
                 ],
             ],
         ],
