@@ -4,7 +4,7 @@
 
    Layout:
      .ty-block      — full section, off-white background
-     .ty-text       — centred heading + body, constrained width
+     .ty-text       — centered heading + body, constrained width
      .ty-image-wrap — full-width image container, overflow hidden
                       (clip prevents scale animation from spilling)
    ============================================================ */
@@ -25,7 +25,7 @@
   text-align: center;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 8px;
 }
 
 /* ---- Heading ---- */
@@ -76,7 +76,6 @@
 @media (max-width: 768px) {
   .ty-text {
     padding: 64px 24px 48px;
-    gap: 20px;
   }
   .ty-image {
     height: auto !important;
