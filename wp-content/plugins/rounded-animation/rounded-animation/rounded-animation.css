@@ -202,7 +202,7 @@
 
 /* ---- Heading ---- */
 .ra-block h2.ra-title {
-  font-size: 1.6rem !important;
+  font-size: 3.5rem !important;
   line-height: 1.25;
   font-weight: 400 !important;
   color: #ffffff;
@@ -212,7 +212,7 @@
   margin-bottom: 1.5rem;
 }
 
-@media (min-width: 1024px) {
+@media (max-width: 1023px) {
   .ra-block h2.ra-title {
     font-size: 2rem !important;
   }
