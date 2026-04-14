@@ -69,10 +69,29 @@ function ps_register_assets() {
         );
     }
 
+    if ( ! wp_style_is( 'odl-image-reveal', 'registered' ) ) {
+        wp_register_style(
+            'odl-image-reveal',
+            plugin_dir_url( __FILE__ ) . '../utils/image-reveal-animation.css',
+            [],
+            '1.0.0'
+        );
+    }
+
+    if ( ! wp_script_is( 'odl-image-reveal', 'registered' ) ) {
+        wp_register_script(
+            'odl-image-reveal',
+            plugin_dir_url( __FILE__ ) . '../utils/image-reveal-animation.js',
+            [],
+            '1.0.0',
+            true
+        );
+    }
+
     wp_register_script(
         'program-stats',
         $base . 'program-stats.js',
-        [ 'odl-counter' ],
+        [ 'odl-counter', 'odl-image-reveal' ],
         '1.0.0',
         true
     );
@@ -102,6 +121,7 @@ add_shortcode( 'program_stats', 'ps_render_shortcode' );
 
 function ps_render_shortcode( $atts ) {
     wp_enqueue_style( 'program-stats' );
+    wp_enqueue_style( 'odl-image-reveal' );
     wp_enqueue_script( 'program-stats' );
 
     $defaults = [
@@ -109,14 +129,15 @@ function ps_render_shortcode( $atts ) {
         'body'        =>
             '<p>Heart Rock Justus Family Recovery Center provides a place where women and their children can stay together during recovery. Families reconnect, children rebuild trust, and mothers begin rebuilding their lives with their children beside them.</p>',
         'btn_text'    => 'Visit Heart Rock',
-        'btn_url'     => '#',
+        'btn_url'     => 'https://heartrockrecovery.org/',
         'btn_target'  => '_blank',
         'stats_label' => 'Over the past year:',
         'stats'       => [
             [ 'num' => '51', 'label' => 'women and 11 children were supported' ],
-            [ 'num' => '6',  'label' => 'families reunified' ],
-            [ 'num' => '4',  'label' => 'babies were born into recovery' ],
             [ 'num' => '10', 'label' => 'women transitioned into independent or semi-independent housing' ],
+             [ 'num' => '4',  'label' => 'babies were born into recovery' ],
+            [ 'num' => '6',  'label' => 'families reunified' ],
+           
         ],
         'photo_url'   => plugin_dir_url( __FILE__ ) . '../img/odl-heart-rock-group-photo-holiday.webp',
         'photo_alt'   => '',
@@ -190,8 +211,8 @@ function ps_render_shortcode( $atts ) {
         </div>
 
         <?php if ( $photo_url ) : ?>
-        <div class="ps-top">
-            <img src="<?php echo $photo_url; ?>" alt="<?php echo $photo_alt; ?>">
+        <div class="ps-top ps-image-wrap">
+            <img class="ps-image" src="<?php echo $photo_url; ?>" alt="<?php echo $photo_alt; ?>">
         </div>
         <?php endif; ?>
 

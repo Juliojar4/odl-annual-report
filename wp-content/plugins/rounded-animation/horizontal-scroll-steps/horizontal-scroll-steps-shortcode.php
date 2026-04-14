@@ -254,6 +254,7 @@ function hss_render_step_after_camp( $step, $index ) {
     $stats        = isset( $step['stats'] )        ? (array) $step['stats']                 : [];
     $photo_url    = isset( $step['photo_url'] )    ? esc_url( $step['photo_url'] )           : '';
     $photo_alt    = isset( $step['photo_alt'] )    ? esc_attr( $step['photo_alt'] )          : '';
+    $photos       = isset( $step['photos'] )       ? (array) $step['photos']                 : [];
     $photo_side   = ( isset( $step['photo_side'] ) && $step['photo_side'] === 'right' ) ? 'right' : 'left';
     $photo_square = ! empty( $step['photo_square'] );
 
@@ -306,7 +307,24 @@ function hss_render_step_after_camp( $step, $index ) {
                     <?php endif; ?>
                 </div>
 
-               
+                <?php if ( ! empty( $photos ) && $photo_side === 'right' ) : ?>
+                <div class="hss-col hss-col--fc-grid">
+                    <?php foreach ( array_slice( $photos, 0, 4 ) as $i => $photo ) :
+                        $url = isset( $photo['url'] ) ? esc_url( $photo['url'] )  : '';
+                        $alt = isset( $photo['alt'] ) ? esc_attr( $photo['alt'] ) : '';
+                    ?>
+                    <div class="hss-fc-photo">
+                        <?php if ( $url ) : ?>
+                        <img src="<?php echo $url; ?>" alt="<?php echo $alt; ?>"<?php echo $i === 2 ? ' style="object-position: top;"' : ''; ?>>
+                        <?php endif; ?>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+                <?php elseif ( $photo_url && $photo_side === 'right' ) : ?>
+                <div class="<?php echo $photo_classes; ?>">
+                    <img src="<?php echo $photo_url; ?>" alt="<?php echo $photo_alt; ?>">
+                </div>
+                <?php endif; ?>
 
             </div>
         </div>
@@ -318,10 +336,12 @@ function hss_render_step_after_camp( $step, $index ) {
 // ── Layout: family-connection ──────────────────────────────────────────────
 
 function hss_render_step_family_connection( $step, $index ) {
-    $allowed  = wp_kses_allowed_html( 'post' );
-    $heading  = isset( $step['heading'] ) ? esc_html( $step['heading'] )        : '';
-    $body     = isset( $step['body'] )    ? wp_kses( $step['body'], $allowed )   : '';
-    $photos   = isset( $step['photos'] )  ? (array) $step['photos']              : [];
+    $allowed   = wp_kses_allowed_html( 'post' );
+    $heading   = isset( $step['heading'] )   ? esc_html( $step['heading'] )        : '';
+    $body      = isset( $step['body'] )      ? wp_kses( $step['body'], $allowed )   : '';
+    $photos    = isset( $step['photos'] )    ? (array) $step['photos']              : [];
+    $photo_url = isset( $step['photo_url'] ) ? esc_url( $step['photo_url'] )        : '';
+    $photo_alt = isset( $step['photo_alt'] ) ? esc_attr( $step['photo_alt'] )       : '';
 
     ob_start();
     ?>
@@ -343,6 +363,11 @@ function hss_render_step_family_connection( $step, $index ) {
                     <?php endif; ?>
                 </div>
 
+                <?php if ( $photo_url ) : ?>
+                <div class="hss-col hss-col--photo">
+                    <img src="<?php echo $photo_url; ?>" alt="<?php echo $photo_alt; ?>">
+                </div>
+                <?php elseif ( ! empty( $photos ) ) : ?>
                 <div class="hss-col hss-col--fc-grid">
                     <?php foreach ( array_slice( $photos, 0, 4 ) as $photo ) :
                         $url = isset( $photo['url'] ) ? esc_url( $photo['url'] )  : '';
@@ -355,6 +380,7 @@ function hss_render_step_family_connection( $step, $index ) {
                     </div>
                     <?php endforeach; ?>
                 </div>
+                <?php endif; ?>
 
             </div>
         </div>
@@ -373,11 +399,11 @@ function hss_default_steps() {
             'heading_line_2'    => "Camp Mariposa: Aaron's Place",
             'body'              =>
                 '<p>One in four children grow up in a home affected by substance use disorder. Without the right support, those experiences can shape mental health, relationships, and increase the likelihood of substance use challenges later in life.</p>'
-                . '<p>Five years ago, when our founder Justin Phillips learned about Camp Mariposa, a national mentoring and prevention program for youth affected by a family member&#39;s substance use, she knew young people in Indiana needed that same support. Since opening, the program has supported 111 young people across Indiana, offering a safe space during some of the most uncertain moments in their lives.</p>'
+                . '<p>Five years ago, when our founder Justin Phillips learned about Camp Mariposa, a national mentoring and prevention program for youth affected by a family member&#39;s substance use, she knew young people in Indiana needed that same support. Since opening, the program has supported <b> 111 young people across Indiana </b>, offering a safe space during some of the most uncertain moments in their lives.</p>'
                 . '<p>Camp Mariposa gives youth something many have never had before: a place to process their experiences, connect with others who understand them, and simply be kids.</p>',
             'button_text'       => "Visit Aaron's Place",
-            'button_url'        => '#',
-            'quote'             => "\u{201C}I guess I have really found my people.\u{201D}",
+            'button_url'        => 'https://aaronsplace.org/',
+            'quote'             => "\u{201C}I guess I have really  found my people.\u{201D}",
             'quote_attribution' => 'Camper',
             'arrow_img_url'     => plugin_dir_url( __FILE__ ) . '../img/horizontal-scroll/odl-campers-around-campfire1.webp',
         ],
@@ -408,8 +434,12 @@ function hss_default_steps() {
                 [ 'num' => '65%',     'label' => 'report using healthy coping strategies to manage stress' ],
                 [ 'num' => '96-100%', 'label' => 'report remaining substance-free in the previous six months' ],
             ],
-            'photo_url'   => plugin_dir_url( __FILE__ ) . '../img/horizontal-scroll/odl-campers-with-squishmallows3.webp',
-            'photo_alt'   => '',
+            'photos'      => [
+                [ 'url' => plugin_dir_url( __FILE__ ) . '../img/horizontal-scroll/odl-camper-smiling-on-hammock-closeup2.webp', 'alt' => '' ],
+                [ 'url' => plugin_dir_url( __FILE__ ) . '../img/horizontal-scroll/odl-campers-with-squishmallows3.webp', 'alt' => '' ],
+                [ 'url' => plugin_dir_url( __FILE__ ) . '../img/horizontal-scroll/odl-campers-hiking4.webp', 'alt' => '' ],
+                [ 'url' => plugin_dir_url( __FILE__ ) . '../img/horizontal-scroll/odl-campers-halloween-pumpkin-carving4.webp', 'alt' => '' ],
+            ],
             'photo_side'  => 'right',
         ],
         [
@@ -417,12 +447,8 @@ function hss_default_steps() {
             'heading' => 'FAMILY CONNECTION',
             'body'    =>
                 '<p>Over the past year, Camp Mariposa hosted <strong>ten family events</strong> that created space for families to learn together and talk openly about how substance use disorder has affected their lives. For many families, this was the first time they talked openly about it.</p>',
-            'photos'  => [
-                [ 'url' => plugin_dir_url( __FILE__ ) . '../img/horizontal-scroll/odl-camper-smiling-on-hammock-closeup2.webp', 'alt' => '' ],
-                [ 'url' => plugin_dir_url( __FILE__ ) . '../img/horizontal-scroll/odl-campers-with-squishmallows3.webp', 'alt' => '' ],
-                [ 'url' => plugin_dir_url( __FILE__ ) . '../img/horizontal-scroll/odl-campers-hiking4.webp', 'alt' => '' ],
-                [ 'url' => plugin_dir_url( __FILE__ ) . '../img/horizontal-scroll/odl-campers-halloween-pumpkin-carving4.webp', 'alt' => '' ],
-            ],
+            'photo_url' => plugin_dir_url( __FILE__ ) . '../img/horizontal-scroll/odl-campers-by-river5.webp',
+            'photo_alt' => '',
         ],
         [
             'layout'       => 'after-camp',
@@ -432,9 +458,9 @@ function hss_default_steps() {
                 . '<p>In 2025, participation grew from 5 youth to 17, which represents more than <strong>240% growth</strong> in under a year. <strong>67%</strong> of those participants came from Camp Mariposa: Aaron\'s Place.</p>',
             'stats_label'  => '',
             'stats'        => [],
-            'photo_url'    => plugin_dir_url( __FILE__ ) . '../img/horizontal-scroll/odl-campers-by-river5.webp',
+            'photo_url'    => plugin_dir_url( __FILE__ ) . '../img/horizontal-scroll/odl-apex.jpg',
             'photo_alt'    => '',
-            'photo_side'   => 'left',
+            'photo_side'   => 'right',
             'photo_square' => true,
         ],
     ];

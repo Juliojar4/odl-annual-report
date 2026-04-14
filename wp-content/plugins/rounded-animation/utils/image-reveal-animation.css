@@ -1,0 +1,37 @@
+/* ============================================================
+   ODL Image Reveal — Utilitário de animação de entrada
+   Classe base:   .odl-reveal-img   (imagem oculta, aguardando)
+   Classe ativa:  .odl-reveal-img--visible  (dispara a animação)
+   ============================================================ */
+
+.odl-reveal-img {
+    opacity: 0;
+    transform: scale(0);
+    transform-origin: center center;
+    will-change: transform, opacity;
+}
+
+.odl-reveal-img--visible {
+    animation: odl-image-reveal 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes odl-image-reveal {
+    from {
+        opacity: 0;
+        transform: scale(0);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .odl-reveal-img {
+        opacity: 1;
+        transform: none;
+    }
+    .odl-reveal-img--visible {
+        animation: none;
+    }
+}
