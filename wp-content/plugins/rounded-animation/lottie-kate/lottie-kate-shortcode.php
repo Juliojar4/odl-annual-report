@@ -72,7 +72,7 @@ function lk_render_shortcode( $atts ) {
             '<p>In 2025, Overdose Lifeline launched KATE, an anonymous overdose prevention chatbot. More than 300,000 people used KATE in its first year, including 250,000 Indiana residents in the first three months alone.</p>'
             . '<p>While KATE uses AI technology to respond in real time, her answers come from a repository built by subject matter experts and grounded in evidence-informed prevention information. KATE received a Shorty Award recognizing its role in expanding access to prevention information through anonymous, stigma-free technology.</p>',
         'btn_text'   => 'Say Hello to KATE',
-        'btn_url'    => '#',
+        'btn_url'    => 'https://hellokate.com/',
         'btn_target' => '_blank',
     ];
 
