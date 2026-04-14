@@ -56,10 +56,29 @@ function ty_register_assets() {
         );
     }
 
+    if ( ! wp_style_is( 'odl-image-reveal', 'registered' ) ) {
+        wp_register_style(
+            'odl-image-reveal',
+            plugin_dir_url( __FILE__ ) . '../utils/image-reveal-animation.css',
+            [],
+            '1.0.0'
+        );
+    }
+
+    if ( ! wp_script_is( 'odl-image-reveal', 'registered' ) ) {
+        wp_register_script(
+            'odl-image-reveal',
+            plugin_dir_url( __FILE__ ) . '../utils/image-reveal-animation.js',
+            [],
+            '1.0.0',
+            true
+        );
+    }
+
     wp_register_script(
         'thank-you',
         $base . 'thank-you.js',
-        [ 'gsap', 'gsap-scrolltrigger' ],
+        [ 'gsap', 'gsap-scrolltrigger', 'odl-image-reveal' ],
         '1.0.0',
         true
     );
@@ -71,6 +90,7 @@ add_shortcode( 'thank_you', 'ty_render_shortcode' );
 
 function ty_render_shortcode( $atts ) {
     wp_enqueue_style( 'thank-you' );
+    wp_enqueue_style( 'odl-image-reveal' );
     wp_enqueue_script( 'thank-you' );
 
     $defaults = [

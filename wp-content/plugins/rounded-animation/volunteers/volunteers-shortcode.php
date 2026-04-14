@@ -70,10 +70,29 @@ function vm_register_assets() {
         );
     }
 
+    if ( ! wp_style_is( 'odl-image-reveal', 'registered' ) ) {
+        wp_register_style(
+            'odl-image-reveal',
+            plugin_dir_url( __FILE__ ) . '../utils/image-reveal-animation.css',
+            [],
+            '1.0.0'
+        );
+    }
+
+    if ( ! wp_script_is( 'odl-image-reveal', 'registered' ) ) {
+        wp_register_script(
+            'odl-image-reveal',
+            plugin_dir_url( __FILE__ ) . '../utils/image-reveal-animation.js',
+            [],
+            '1.0.0',
+            true
+        );
+    }
+
     wp_register_script(
         'volunteers',
         $base . 'volunteers.js',
-        [ 'gsap', 'gsap-scrolltrigger', 'odl-counter' ],
+        [ 'gsap', 'gsap-scrolltrigger', 'odl-counter', 'odl-image-reveal' ],
         '1.0.0',
         true
     );
@@ -85,6 +104,7 @@ add_shortcode( 'volunteers', 'vm_render_shortcode' );
 
 function vm_render_shortcode( $atts ) {
     wp_enqueue_style( 'volunteers' );
+    wp_enqueue_style( 'odl-image-reveal' );
     wp_enqueue_script( 'volunteers' );
 
     $defaults = [
